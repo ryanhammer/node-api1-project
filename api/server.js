@@ -88,4 +88,25 @@ server.put("/api/users/:id", async (req, res) => {
   }
 })
 
+// [DELETE] /api/users/:id (D of CRUD, remove user by id)
+server.delete("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+  Users.remove(id)
+    .then( (deletedUser) => {
+      if (!deletedUser) {
+        res.status(404).json({
+          message: `The user with the specified ID does not exist`,
+        });
+      } else {
+        res.json(deletedUser);
+      }
+    }) 
+    .catch( (err) => {
+      console.log(err);
+      res.status(500).json({
+        message: "The user information could not be modified"
+      });
+    })
+})
+
 module.exports = server; // EXPORT THE SERVER
