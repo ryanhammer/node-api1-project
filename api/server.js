@@ -22,7 +22,7 @@ server.post("/api/users", (req, res) => {
       .catch( (err) => {
         res.status(500).json({
           message: "There was an error while saving the user to the database",
-          stack: err.stack
+          error: err.message
         })
       })
   }
@@ -36,14 +36,31 @@ server.get("/api/users", (req, res) => {
       res.json(users);
     })
     .catch( (err) => {
+      console.log(err);
       res.status(500).json({
-        error: "something went bad getting all users",
-        message: err.message,
-        stack: err.stack
+        message: "The users information could not be retrieved"
       })
     })
 })
 
+// [GET] /api/users/:id (R of CRUD, individual user by id)
+server.get("/api/users/:id", async (req, res) => {
+  try {
+    const user = await Users.findById(req.params.id);
+    if (!user) {
+      res.status(404).json({
+        message: `The user with the specified ID does not exist`,
+      })
+    } else {
+      res.json(user);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "The user information could not be retrieved"
+    })
+  }
+})
 
 
 module.exports = server; // EXPORT THE SERVER
