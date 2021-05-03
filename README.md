@@ -24,8 +24,8 @@ There are two possible ways to submit your project. Your instructor should have 
 
 - [x] Fork and clone the repository.
 - [x] Implement your project in a `firstname-lastname` branch.
-- [ ] Create a pull request of `firstname-lastname` against your `main` branch.
-- [ ] Open the assignment in Canvas and submit your pull request.
+- [x] Create a pull request of `firstname-lastname` against your `main` branch.
+- [x] Open the assignment in Canvas and submit your pull request.
 
 ### Task 2: Minimum Viable Product
 
@@ -61,11 +61,11 @@ Each User _resource_ should conform to the following structure (AKA schema):
 
 You can find them inside `api/users/model.js`. All of these functions return Promises.
 
-- `find` Resolves to the list of users (or empty array).
-- `findById` Takes an `id` and resolves to the user with that id (or null if the id does not exist).
-- `insert` Takes a new user `{ name, bio }` and resolves to the the newly created user `{ id, name, bio }`.
-- `update` Takes an `id` and an existing user `{ name, bio }` and resolves the updated user `{ id, name, bio}` (or null if the id does not exist).
-- `remove` Takes an `id`  and resolves to the deleted user `{ id, name, bio }`.
+(x) `find` Resolves to the list of users (or empty array).
+(x) `findById` Takes an `id` and resolves to the user with that id (or null if the id does not exist).
+(x) `insert` Takes a new user `{ name, bio }` and resolves to the the newly created user `{ id, name, bio }`.
+(x) `update` Takes an `id` and an existing user `{ name, bio }` and resolves the updated user `{ id, name, bio}` (or null if the id does not exist).
+(x) `remove` Takes an `id`  and resolves to the deleted user `{ id, name, bio }`.
 
 #### Endpoint Specifications
 

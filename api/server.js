@@ -79,7 +79,7 @@ server.put("/api/users/:id", async (req, res) => {
         message: `The user with the specified ID does not exist`,
       });
     } else {
-      res.json(updatedUser);
+      res.status(200).json(updatedUser);
     }
   } catch (err) {
     res.status(500).json({
@@ -104,7 +104,7 @@ server.delete("/api/users/:id", (req, res) => {
     .catch( (err) => {
       console.log(err);
       res.status(500).json({
-        message: "The user information could not be modified"
+        message: "The user could not be removed"
       });
     })
 })
