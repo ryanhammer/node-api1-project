@@ -13,7 +13,7 @@ server.post("/api/users", (req, res) => {
   if (!userFromClient.name || !userFromClient.bio) {
     res.status(400).json({
       message: "Please provide name and bio for the user"
-    })
+    });
   } else {
     Users.insert(req.body)
       .then( (newUser) => {
@@ -23,7 +23,7 @@ server.post("/api/users", (req, res) => {
         res.status(500).json({
           message: "There was an error while saving the user to the database",
           error: err.message
-        })
+        });
       })
   }
 })
@@ -39,7 +39,7 @@ server.get("/api/users", (req, res) => {
       console.log(err);
       res.status(500).json({
         message: "The users information could not be retrieved"
-      })
+      });
     })
 })
 
@@ -50,7 +50,7 @@ server.get("/api/users/:id", async (req, res) => {
     if (!user) {
       res.status(404).json({
         message: `The user with the specified ID does not exist`,
-      })
+      });
     } else {
       res.json(user);
     }
@@ -58,9 +58,34 @@ server.get("/api/users/:id", async (req, res) => {
     console.log(err);
     res.status(500).json({
       message: "The user information could not be retrieved"
-    })
+    });
   }
 })
 
+
+// [PUT] /api/users/:id (U of CRUD, individual user by id)
+server.put("/api/users/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = req.body;
+    if ( !user.name || !user.bio ) {
+      res.status(400).json({
+        message: "Please provide name and bio for the user"
+      });
+    }
+    const updatedUser = await Users.update( id, user );
+    if (!updatedUser) {
+      res.status(404).json({
+        message: `The user with the specified ID does not exist`,
+      });
+    } else {
+      res.json(updatedUser);
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: "The user information could not be modified"
+    });
+  }
+})
 
 module.exports = server; // EXPORT THE SERVER
